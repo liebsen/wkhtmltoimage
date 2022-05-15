@@ -11,11 +11,12 @@
     <style>
       body {
         font-family: 'Rubik', sans-serif;
+        back
       }
       .capture-img {
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: cover;
+        background-size: contain;
         border: 3px solid whitesmoke;
         border-radius: 1rem;
         min-height: 20rem;
@@ -31,9 +32,6 @@
         let data = {
           url: document.getElementById('capture_url').value
         }
-        console.log('---')
-        console.log(data)
-
         button.classList.add('is-loading')
         var request = new Request(url, {
           method: 'POST',
@@ -45,9 +43,10 @@
         });
 
         fetch(request).then(res => res.json()).then(data => {
-          console.log(data)
-          document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
-          button.classList.remove('is-loading')
+          setTimeout(() => {
+            document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
+            button.classList.remove('is-loading')
+          }, 1000)
           // Handle response we get from the API
         })
       }
