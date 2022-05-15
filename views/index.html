@@ -37,7 +37,7 @@
         button.classList.add('is-loading')
         var request = new Request(url, {
           method: 'POST',
-          body: data,
+          body: JSON.stringify(data),
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
