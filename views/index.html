@@ -24,33 +24,33 @@
     <script>
 
       function capture () {
-        let button = document.querySelector('.send-btn')
-
+        const button = document.querySelector('.send-btn')
         const url = 'https://captures.icehub.link/capture';
         // const url = 'http://localhost:5555/capture';
 
         let data = {
           url: document.getElementById('capture_url').value
         }
+        console.log('---')
+        console.log(data)
 
         button.classList.add('is-loading')
         var request = new Request(url, {
           method: 'POST',
-          body: JSON.stringify(data),
+          body: data,
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
         });
 
-        fetch(request).then(response => response.json()).then(data => {
+        fetch(request).then(res => {
+          const data = res.json()
           console.log(data)
           document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
           button.classList.remove('is-loading')
           // Handle response we get from the API
         })
-
-        return false
       }
 
     </script>
@@ -64,14 +64,12 @@
           </h1>
           <div class="columns">
             <div class="column">
-              <form>
-                <div class="field">
-                  <input class="input" type="text" id="capture_url"/>
-                </div>
-                <div class="field">
-                  <button onclick="capture()" class="button send-btn">Capture</button>
-                </div>
-              </form>
+              <div class="field">
+                <input class="input" type="text" id="capture_url"/>
+              </div>
+              <div class="field">
+                <button onclick="capture()" class="button send-btn">Capture</button>
+              </div>
             </div>
             <div class="column">
               <div class="capture-img"></div>
