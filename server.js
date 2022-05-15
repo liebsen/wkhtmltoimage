@@ -1,9 +1,13 @@
 const express = require('express')
 const app = express()
 const path = require("path")
+const cors = require("cors")
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = 'captures'
 const port = 5555
+
+app.use(express.static(path.join(__dirname, 'captures')))
+app.use(cors())
 app.use(express.json())
 
 wkhtmltoimage.generate('https://google.com/', { output: 'out.jpg' });
