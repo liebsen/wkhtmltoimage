@@ -12,10 +12,20 @@
       body {
         font-family: 'Rubik', sans-serif;
       }
+      .capture-img {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        border: 3px solid whitesmoke;
+        border-radius: 1rem;
+        min-height: 15rem;
+      }
     </style>
     <script>
 
       function capture () {
+        let button = document.querySelector('.send-btn')
+
         const url = 'https://captures.icehub.link/capture';
         // const url = 'http://localhost:5555/capture';
 
@@ -23,6 +33,7 @@
           url: document.getElementById('capture_url').value
         }
 
+        button.classList.add('is-loading')
         var request = new Request(url, {
           method: 'POST',
           body: JSON.stringify(data),
@@ -32,8 +43,10 @@
           }
         });
 
-        fetch(request).then(res => {
-          console.log(res)
+        fetch(request).then(response => response.json()).then(data => {
+          console.log(data)
+          document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
+          button.classList.remove('is-loading')
           // Handle response we get from the API
         })
 
@@ -49,15 +62,20 @@
           <h1 class="title">
             wkhtml<i>to</i>image API v1.0.0
           </h1>
-          <div class="form">
-            <form onsubmit="">
-              <div class="field">
-                <input class="input" type="text" id="capture_url"/>
-              </div>
-              <div class="field">
-                <input type="button" onclick="capture()" class="button" value="Capture"/>
-              </div>
-            </form>
+          <div class="columns">
+            <div class="column">
+              <form onsubmit="">
+                <div class="field">
+                  <input class="input" type="text" id="capture_url"/>
+                </div>
+                <div class="field">
+                  <input type="button" onclick="capture()" class="button send-btn" value="Capture"/>
+                </div>
+              </form>
+            </div>
+            <div class="column">
+              <div class="capture-img"></div>
+            </div>
           </div>
         </div>
       </div>
