@@ -44,8 +44,7 @@
           }
         });
 
-        fetch(request).then(res => {
-          const data = res.json()
+        fetch(request).then(res => res.json()).then(data => {
           console.log(data)
           document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
           button.classList.remove('is-loading')
