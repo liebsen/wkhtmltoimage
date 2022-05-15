@@ -3,10 +3,10 @@ const app = express()
 const path = require("path")
 const cors = require("cors")
 const wkhtmltoimage = require('wkhtmltoimage')
-const uploads_folder = 'captures'
+const uploads_folder = '/captures/'
 const port = 5555
 
-app.use(express.static(path.join(__dirname, 'captures')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(cors())
 
@@ -21,7 +21,7 @@ app.post('/capture', (req, res) => {
   var filepath = ''
   if (url) {
     filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-    filepath = path.join(`${__dirname}/${uploads_folder}/${filename}.jpg`)
+    filepath = path.join(`${__dirname}${uploads_folder}${filename}.jpg`)
     wkhtmltoimage.generate(url, { output: filepath })
     success = true
   }

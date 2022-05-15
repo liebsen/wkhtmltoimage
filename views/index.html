@@ -15,11 +15,12 @@
       }
       .capture-img {
         background-repeat: no-repeat;
-        background-position: center center;
-        background-size: contain;
+        background-position: top center;
+        background-size: 100%;
+        background-image: url(/assets/images/flat-browser-psd.jpg);
         border: 3px solid whitesmoke;
         border-radius: 1rem;
-        min-height: 20rem;
+        min-height: 21rem;
       }
     </style>
     <script>
@@ -44,7 +45,7 @@
 
         fetch(request).then(res => res.json()).then(data => {
           setTimeout(() => {
-            document.querySelector('.capture-img').style.backgroundImage = `url(${data.filename})`
+            document.querySelector('.capture-img').style.backgroundImage = `url(/captures/${data.filename})`
             button.classList.remove('is-loading')
           }, 1000)
           // Handle response we get from the API
