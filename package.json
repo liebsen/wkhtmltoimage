@@ -1,0 +1,23 @@
+{
+  "name": "wkhtmltoimage-api",
+  "version": "1.0.0",
+  "description": "website capture api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liebsen/wkhtmltoimage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liebsen/wkhtmltoimage/issues"
+  },
+  "homepage": "https://github.com/liebsen/wkhtmltoimage#readme",
+  "dependencies": {
+    "wkhtmltoimage": "^0.1.5"
+  }
+}
