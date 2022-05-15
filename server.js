@@ -17,16 +17,17 @@ app.get('/', (req, res) => {
 app.post('/capture', (req, res) => {
   var url = req.body.url
   var success = false
+  var filename = ''
   var filepath = ''
   if (url) {
-    var filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+    filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
     filepath = path.join(`${__dirname}/${uploads_folder}/${filename}.jpg`)
     wkhtmltoimage.generate(url, { output: filepath })
     success = true
   }
   res.json({
     success: success,
-    filepath: filepath
+    filename: filename
   })
 })
 
