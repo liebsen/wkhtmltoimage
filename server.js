@@ -27,7 +27,7 @@ app.post('/capture', (req, res) => {
   }
   res.json({
     success: success,
-    filename: filename
+    filename: `${filename}.jpg`
   })
 })
 
