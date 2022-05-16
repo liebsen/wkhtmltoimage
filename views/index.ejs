@@ -1,16 +1,17 @@
+[?- include ('./partials/functions') ?]
 [?- include ('./partials/header') ?]
 [?- include ('./partials/navbar') ?]
   <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">
+        <h1 class="title">  
           html<i>to</i>image API v1.0.0
         </h1>
         <div class="columns is-multiline">
           [? for (var i in files) { ?]
           <div class="column is-6 is-4-desktop is-3-widescreen">
             <a href="/captures/[?= files[i] ?]" target="_blank">
-              <div class="capture-img" style="background-image: url(/captures/[?= files[i] ?])"></div>
+              <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(files[i]) ?])"></div>
             </a>
           </div>
           [? } ?]
