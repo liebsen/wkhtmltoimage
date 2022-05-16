@@ -1,0 +1,19 @@
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          html<i>to</i>image API v1.0.0
+        </h1>
+        <div class="columns is-multiline">
+          [? for (var i in files) { ?]
+          <div class="column is-2">
+            <div class="capture-img" style="background-image: url(/captures/[?= files[i] ?])"></div>
+            [? } ?]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+[?- include('./partials/footer') ?]

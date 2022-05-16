@@ -1,0 +1,16 @@
+body {
+  font-family: 'Rubik', sans-serif;
+  back
+}
+.navbar-item img {
+  max-height: 3rem;
+}
+.capture-img {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100%;
+  background-image: url(/assets/images/flat-browser-psd.jpg);
+  border: 3px solid whitesmoke;
+  border-radius: 1rem;
+  min-height: 21rem;
+}

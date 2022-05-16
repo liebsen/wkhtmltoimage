@@ -1,0 +1,25 @@
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          html<i>to</i>image API v1.0.0
+        </h1>
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <input class="input" type="text" id="capture_url"/>
+            </div>
+            <div class="field">
+              <button onclick="capture()" class="button send-btn">Capture</button>
+            </div>
+          </div>
+          <div class="column">
+            <div class="capture-img"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+[?- include ('./partials/footer') ?]

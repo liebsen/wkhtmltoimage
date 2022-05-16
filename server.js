@@ -1,18 +1,21 @@
 const express = require('express')
 const app = express()
-const path = require("path")
-const cors = require("cors")
+const path = require('path')
+const fs = require('fs')
+const cors = require('cors')
+const ejs = require('ejs')
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = '/public/captures/'
 const port = 5555
 
+ejs.delimiter = '?'
+ejs.openDelimiter = '['
+ejs.closeDelimiter = ']'
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(cors())
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/views/index.html`))
-})
+app.set('view engine', 'ejs')
 
 app.post('/capture', (req, res) => {
   var url = req.body.url
@@ -21,7 +24,7 @@ app.post('/capture', (req, res) => {
   var filepath = ''
   if (url) {
     filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-    filepath = path.join(`${__dirname}${uploads_folder}${filename}.jpg`)
+    filepath = `${__dirname}${uploads_folder}${filename}.jpg`
     console.log(url)
     console.log(filepath)
     wkhtmltoimage.generate(url, { output: filepath })
@@ -31,6 +34,26 @@ app.post('/capture', (req, res) => {
     success: success,
     filename: `${filename}.jpg`
   })
+})
+
+app.get('/', (req, res) => {
+  const directoryPath = path.join(__dirname, 'public/captures')
+  let captures = []
+  fs.readdir(directoryPath, function (err, files) {
+    if (err) {
+      return console.log('Unable to scan directory: ' + err)
+    } 
+    files.forEach(function (file) {
+      if (file !== '.gitignore') {
+        captures.push(file)
+      }
+    })
+    res.render(`${__dirname}/views/index.ejs`, { files: captures })
+  })  
+})
+
+app.get('/:view', (req, res) => {
+  res.render(`${__dirname}/views/${req.params.view}.ejs`)
 })
 
 app.listen(port, () => {
