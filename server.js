@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
       return console.log('Unable to scan directory: ' + err)
     } 
     files = files.filter(e => e !== '.gitignore')
+    console.log(files)
     res.render(`${__dirname}/views/index.ejs`, { files: files })
   })  
 })
