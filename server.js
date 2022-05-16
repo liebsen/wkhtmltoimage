@@ -43,12 +43,8 @@ app.get('/', (req, res) => {
     if (err) {
       return console.log('Unable to scan directory: ' + err)
     } 
-    files.forEach(function (file) {
-      if (file !== '.gitignore') {
-        captures.push(file)
-      }
-    })
-    res.render(`${__dirname}/views/index.ejs`, { files: captures })
+    files = files.filter(e => e !== '.gitignore')
+    res.render(`${__dirname}/views/index.ejs`, { files: files })
   })  
 })
 
