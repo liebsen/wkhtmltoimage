@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
       return fs.statSync(`${directoryPath}/${a}`).mtime.getTime() - fs.statSync(`${directoryPath}/${b}`).mtime.getTime()
     })
     res.render(`${__dirname}/views/index.ejs`, {
-      files: files
+      files: files.reverse()
     })
   })  
 })
