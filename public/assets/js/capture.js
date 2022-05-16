@@ -1,13 +1,11 @@
 
 function capture () {
   const button = document.querySelector('.send-btn')
-  const url = 'https://captures.icehub.link/capture';
-  // const url = 'http://localhost:5555/capture';
   let data = {
     url: document.getElementById('capture_url').value
   }
   button.classList.add('is-loading')
-  var request = new Request(url, {
+  var request = new Request('/capture', {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
