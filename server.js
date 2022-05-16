@@ -4,9 +4,19 @@ const path = require('path')
 const fs = require('fs')
 const cors = require('cors')
 const ejs = require('ejs')
+var mysql = require('mysql')
+const { randomUUID } = require('crypto')
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = '/public/captures/'
 const port = 5555
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'me',
+  password : 'secret',
+  database : 'my_db'
+});
+ 
+connection.connect();  
 
 ejs.delimiter = '?'
 ejs.openDelimiter = '['
@@ -25,12 +35,7 @@ app.post('/capture', (req, res) => {
   if (url) {
     filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
     filepath = `${__dirname}${uploads_folder}${filename}.jpg`
-    console.log(url)
-    console.log(filepath)
     return wkhtmltoimage.generate(url, { output: filepath }, (code, signal) => {
-      console.log(code)
-      console.log(signal)
-      console.log('----')
       res.json({
         success: true,
         filename: `${filename}.jpg`
