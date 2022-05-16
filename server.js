@@ -36,6 +36,7 @@ app.post('/capture', (req, res) => {
     uuid = uuidv4()
     filepath = `${__dirname}${uploads_folder}${uuid}.jpg`
     let sql = `INSERT INTO captures SET uuid = '${uuid}', url = '${url}', created = NOW(), updated = NOW(), enabled = 1`
+    console.log(sql)
     connection.query(sql, function (error, results, fields) {
       if (error) throw error;
       console.log('The query ran good', results);
@@ -45,7 +46,7 @@ app.post('/capture', (req, res) => {
       res.json({
         success: true,
         url: url,
-        filename: `${uuid}.jpg`
+        uuid: uuid
       })
     })
   }
