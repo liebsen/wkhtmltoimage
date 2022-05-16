@@ -11,7 +11,7 @@
           [? for (var i in files) { ?]
           <div class="column is-6 is-4-desktop is-3-widescreen">
             <a href="[?= files[i].url ?]" target="_blank">
-              <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(files[i].uuid) ?])">
+              <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(`${files[i].uuid}.jpg`) ?])">
                 <span class="tag is-rounded">[?= files[i].url ?]</span>
               </div>
             </a>
