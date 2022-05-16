@@ -3,7 +3,6 @@ function capture () {
   const button = document.querySelector('.send-btn')
   const url = 'https://captures.icehub.link/capture';
   // const url = 'http://localhost:5555/capture';
-
   let data = {
     url: document.getElementById('capture_url').value
   }
@@ -15,7 +14,7 @@ function capture () {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
-  });
+  })
 
   fetch(request).then(res => res.json()).then(data => {
     setTimeout(() => {

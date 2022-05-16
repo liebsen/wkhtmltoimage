@@ -2,8 +2,16 @@ body {
   font-family: 'Rubik', sans-serif;
   back
 }
+.navbar {
+  min-height: 4rem;
+}
+
+.navbar-brand .navbar-item:nth-child(1) {
+  min-width: 5rem;
+}
 .navbar-item img {
   max-height: 3rem;
+  max-width: 3rem;
 }
 .capture-img {
   background-repeat: no-repeat;
