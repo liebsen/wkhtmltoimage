@@ -20,6 +20,9 @@ body {
 }
 
 .capture-img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   padding: 0.5rem;
   background-repeat: no-repeat;
   background-position: top center;
