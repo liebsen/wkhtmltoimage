@@ -1,22 +1,21 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const fs = require('fs')
 const cors = require('cors')
 const ejs = require('ejs')
 var mysql = require('mysql')
-const { randomUUID } = require('crypto')
+const { v4: uuidv4 } = require('uuid')
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = '/public/captures/'
 const port = 5555
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
-});
+  host     : process.env.DB_HOST,
+  user     : process.env.DB_USER,
+  password : process.env.DB_PASSWD,
+  database : process.env.DB_NAME
+})
  
-connection.connect();  
+connection.connect()
 
 ejs.delimiter = '?'
 ejs.openDelimiter = '['
@@ -28,17 +27,25 @@ app.use(cors())
 app.set('view engine', 'ejs')
 
 app.post('/capture', (req, res) => {
+  console.log('/capture')
   var url = req.body.url
   var success = false
-  var filename = ''
+  var uuid = ''
   var filepath = ''
   if (url) {
-    filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-    filepath = `${__dirname}${uploads_folder}${filename}.jpg`
+    uuid = uuidv4()
+    filepath = `${__dirname}${uploads_folder}${uuid}.jpg`
+    let sql = `INSERT INTO captures SET uuid = '${uuid}', url = '${url}', created = NOW(), updated = NOW(), enabled = 1`
+    connection.query(sql, function (error, results, fields) {
+      if (error) throw error;
+      console.log('The query ran good', results);
+    })    
+    // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
     return wkhtmltoimage.generate(url, { output: filepath }, (code, signal) => {
       res.json({
         success: true,
-        filename: `${filename}.jpg`
+        url: url,
+        filename: `${uuid}.jpg`
       })
     })
   }
@@ -49,20 +56,13 @@ app.post('/capture', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  const directoryPath = path.join(__dirname, 'public/captures')
-  let captures = []
-  fs.readdir(directoryPath, (err, files) => {
-    if (err) {
-      return console.log('Unable to scan directory: ' + err)
-    }
-    files = files.filter(e => e !== '.gitignore')
-    files.sort(function(a, b) {
-      return fs.statSync(`${directoryPath}/${a}`).mtime.getTime() - fs.statSync(`${directoryPath}/${b}`).mtime.getTime()
-    })
+  let sql = `SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC`
+  connection.query(sql, function (error, results, fields) {
+    if (error) throw error
     res.render(`${__dirname}/views/index.ejs`, {
-      files: files.reverse()
+      files: results
     })
-  })  
+  })    
 })
 
 app.get('/:view', (req, res) => {
