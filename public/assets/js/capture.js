@@ -18,7 +18,7 @@ function capture () {
 
   fetch(request).then(res => res.json()).then(data => {
     setTimeout(() => {
-      document.querySelector('.capture-img').style.backgroundImage = `url(/captures/${data.filename})`
+      document.querySelector('.capture-img').style.backgroundImage = `url(/captures/${data.uuid}.jpg)`
       button.classList.remove('is-loading')
     }, 1000)
     // Handle response we get from the API
