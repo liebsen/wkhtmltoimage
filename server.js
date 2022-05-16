@@ -39,12 +39,16 @@ app.post('/capture', (req, res) => {
 app.get('/', (req, res) => {
   const directoryPath = path.join(__dirname, 'public/captures')
   let captures = []
-  fs.readdir(directoryPath, function (err, files) {
+  fs.readdir(directoryPath, (err, files) => {
     if (err) {
       return console.log('Unable to scan directory: ' + err)
-    } 
+    }
+    files = files.filter(e => e !== '.gitignore')
+    files.sort(function(a, b) {
+      return fs.statSync(`${directoryPath}/${a}`).mtime.getTime() - fs.statSync(`${directoryPath}/${b}`).mtime.getTime()
+    })
     res.render(`${__dirname}/views/index.ejs`, {
-      files: files.filter(e => e !== '.gitignore')
+      files: files
     })
   })  
 })
