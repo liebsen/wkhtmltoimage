@@ -27,11 +27,18 @@ app.post('/capture', (req, res) => {
     filepath = `${__dirname}${uploads_folder}${filename}.jpg`
     console.log(url)
     console.log(filepath)
-    wkhtmltoimage.generate(url, { output: filepath })
-    success = true
+    wkhtmltoimage.generate(url, { output: filepath }, (code, signal) => {
+      console.log(code)
+      console.log(signal)
+      console.log('----')
+      res.json({
+        success: true,
+        filename: `${filename}.jpg`
+      })
+    })
   }
   res.json({
-    success: success,
+    success: false,
     filename: `${filename}.jpg`
   })
 })
