@@ -28,7 +28,6 @@ app.use(cors())
 app.set('view engine', 'ejs')
 
 app.post('/capture', (req, res) => {
-  console.log('/capture')
   var url = req.body.url
   var success = false
   var uuid = ''
@@ -37,23 +36,23 @@ app.post('/capture', (req, res) => {
     uuid = uuidv4()
     filepath = `${__dirname}${uploads_folder}${uuid}.jpg`
     let sql = `INSERT INTO captures SET uuid = '${uuid}', url = '${url}', created = NOW(), updated = NOW(), enabled = 1`
-    console.log(sql)
-    connection.query(sql, function (error, results, fields) {
+    return connection.query(sql, function (error, results, fields) {
       if (error) throw error;
-      console.log('The query ran good', results);
-    })    
-    // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-    return wkhtmltoimage.generate(url, {
-      output: filepath,
-      noStopSlowScripts: true,
-      javascriptDelay: 5000
-    }, (code, signal) => {
-      res.json({
-        success: true,
-        url: url,
-        uuid: uuid
+      // sql ok
+      // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
+      return wkhtmltoimage.generate(url, {
+        output: filepath,
+        noStopSlowScripts: true,
+        javascriptDelay: 5000
+      }, (code, signal) => {
+        // shot ok
+        res.json({
+          success: true,
+          url: url,
+          uuid: uuid
+        })
       })
-    })
+    })    
   }
   res.json({
     success: false,
