@@ -3,6 +3,7 @@ const app = express()
 const path = require('path')
 const cors = require('cors')
 const ejs = require('ejs')
+var fs = require('fs')
 var mysql = require('mysql2')
 const { v4: uuidv4 } = require('uuid')
 const wkhtmltoimage = require('wkhtmltoimage')
@@ -83,6 +84,35 @@ app.get('/:view', (req, res) => {
   } else {
     res.render(`${__dirname}/views/${req.params.view}.ejs`)
   }
+})
+
+app.get('/r/:uuid', (req, res) => {
+  connection.query(`DELETE FROM captures WHERE uuid = '${req.params.uuid}'`, function (error, results, fields) {
+    if (error) throw error
+    var data = {
+      success: false,
+      status: 'danger',
+      title: 'Remove shot',
+      message: 'Something wrong happened while trying to remove this shot. Please tray again later.'
+    }
+    var filepath = `${__dirname}${uploads_folder}${req.params.uuid}.jpg`
+    fs.unlink(filepath, function(err) {
+      if(err && err.code == 'ENOENT') {
+        // file doens't exist
+        data.message = `File doesn't exist, won't remove it.`
+        data.status = 'warning'
+      } else if (err) {
+        // other errors, e.g. maybe we don't have enough permission
+        data.message = `Error occurred while trying to remove file`
+      } else {
+        data.message = `The shot was successfully removed from the system`
+        data.status = 'success'
+      }
+      res.render(`${__dirname}/views/page.ejs`, {
+        data: data
+      })
+    })
+  })    
 })
 
 app.listen(port, () => {

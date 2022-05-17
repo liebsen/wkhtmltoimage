@@ -1,0 +1,23 @@
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-5">
+            <h1 class="title">
+              [?= data.title ?]
+            </h1>
+            <div class="notification is-light is-[?= data.status ?]">
+              <p>[?= data.message ?]</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="capture-img"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/capture.js"></script>
+  </section>
+[?- include ('./partials/footer') ?]
