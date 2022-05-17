@@ -9,9 +9,17 @@
             <h1 class="title">
               [?= extractFQD(data.url) ?]
             </h1>
-            <div class="field">
-              <textarea class="textarea" placeholder="https://google.com" disabled>[?= data.url ?]</textarea>
+            <div class="box">
+              <p class="has-text-weight-bold">
+                [?= data.url ?]  
+              </p>
+              <p class="has-text-weight-bold">
+                [?= data.created ?]  
+              </p>
             </div>
+            <!--div class="field">
+              <textarea class="textarea" placeholder="https://google.com" disabled>[?= data.url ?]</textarea>
+            </div-->
             <div class="buttons">
               <a href="/" class="button is-light">
                 <span class="has-text-weight-bold">Back</span>
