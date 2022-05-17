@@ -1,0 +1,40 @@
+[?- include ('./partials/functions') ?]
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-5">
+            <h1 class="title">
+              [?= extractFQD(data.url) ?]
+            </h1>
+            <div class="field">
+              <textarea class="textarea" placeholder="https://google.com" disabled>[?= data.url ?]</textarea>
+            </div>
+            <div class="buttons">
+              <a href="/" class="button is-light">
+                <span class="has-text-weight-bold">Back</span>
+              </a>
+              <a href="[?= encoderURI(data.url) ?]" class="button is-info">
+                <span class="has-text-weight-bold">Visit</span>
+              </a>
+              <a href="/capture" class="button is-danger">
+                <span class="has-text-weight-bold">Capture</span>
+              </a>
+              <a href="#" class="button is-success" onclick="copyClipboard('[?= encoderURI(data.url) ?]')">
+                <span class="has-text-weight-bold">Share</span>
+              </a>
+            </div>
+          </div>
+          <div class="column">
+            <a href="[?= encoderURI(data.url) ?]" target="_blank">
+              <div class="capture-img" style="background-image: url(/captures/[?= data.uuid ?].jpg)"></div>
+            </a>
+          </div>
+        </div>
+      </div>      
+    </div>
+    <script src="/assets/js/common.js"></script>
+  </section>
+[?- include ('./partials/footer') ?]

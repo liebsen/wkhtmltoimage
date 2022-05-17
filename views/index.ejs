@@ -10,7 +10,7 @@
         <div class="columns is-multiline">
           [? for (var i in files) { ?]
           <div class="column is-6 is-4-desktop is-3-widescreen">
-            <a href="[?= files[i].url ?]" target="_blank">
+            <a href="/[?= files[i].uuid ?]">
               <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(`${files[i].uuid}.jpg`) ?])">
                 <span class="tag is-rounded">[?= extractFQD(files[i].url) ?]</span>
               </div>

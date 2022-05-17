@@ -61,8 +61,7 @@ app.post('/capture', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  let sql = `SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC`
-  connection.query(sql, function (error, results, fields) {
+  connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC`, function (error, results, fields) {
     if (error) throw error
     res.render(`${__dirname}/views/index.ejs`, {
       files: results
@@ -71,7 +70,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:view', (req, res) => {
-  res.render(`${__dirname}/views/${req.params.view}.ejs`)
+  const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
+  if(regexExp.test(req.params.view)) {
+    connection.query(`SELECT * FROM captures WHERE uuid = '${req.params.view}' AND enabled = 1`, function (error, results, fields) {
+      if (error) throw error
+      if (results[0]) {
+        res.render(`${__dirname}/views/shot.ejs`, { data: results[0] })
+      } else {
+        res.render(`${__dirname}/views/notfound.ejs`)  
+      }      
+    })
+  } else {
+    res.render(`${__dirname}/views/${req.params.view}.ejs`)
+  }
 })
 
 app.listen(port, () => {
