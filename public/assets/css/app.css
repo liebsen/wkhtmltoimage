@@ -15,6 +15,7 @@ body {
   max-width: 3rem;
 }
 .is-navbar-footer {
+  background-color: transparent;
   min-height: 0.25rem;
 }
 .space-evenly {
