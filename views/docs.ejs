@@ -6,16 +6,23 @@
         <div class="columns">
           <div class="column is-5">
             <h1 class="title">
-              html<i>to</i>image API v1.0.0
+              Docs<i></i>
             </h1>
-            <div class="field has-addons space-evenly">
-              <input class="input has-border-right-square" type="text" id="capture_url" placeholder="https://mysite.com"/>
-              <div class="control">
-                <button onclick="capture()" class="button is-success send-btn">
-                  Capture
-                </button>
-              </div>
+            <div class="notification is-light">
+              <p>This project is no meant to be object of further development and / or maintained in the future.</p>
             </div>
+<pre>
+<span class="tag is-success">POST</span> https://captures.icehub.link/capture
+<br>
+payload: { 
+  url: https://mysite.com 
+}
+
+response: {
+  success: Boolean,
+  url: String,
+  uuid: String
+}</pre>
           </div>
           <div class="column">
             <div class="capture-img"></div>
