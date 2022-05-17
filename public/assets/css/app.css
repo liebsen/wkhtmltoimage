@@ -18,7 +18,13 @@ body {
 .is-navbar-footer {
   min-height: 0.25rem;
 }
-
+.space-evenly {
+  justify-content: space-evenly!important;
+}
+.has-border-right-square {
+  border-bottom-right-radius: 0!important;
+  border-top-right-radius: 0!important;
+}
 .capture-img {
   display: flex;
   justify-content: flex-end;

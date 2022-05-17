@@ -45,8 +45,8 @@ app.post('/capture', (req, res) => {
     // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
     return wkhtmltoimage.generate(url, {
       output: filepath,
-      noStopSlowScripts: true
-      // 'javascript-delay': 3
+      noStopSlowScripts: true,
+      javascriptDelay: 5000
     }, (code, signal) => {
       res.json({
         success: true,

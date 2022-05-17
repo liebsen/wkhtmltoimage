@@ -2,7 +2,9 @@
 encoderURI = str => {
   return encodeURIComponent(str)
 }
-encoderURI = str => {
-  return encodeURIComponent(str)
+extractFQD = url => {
+  var matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)
+  var domain = matches && matches[1]
+  return encodeURIComponent(domain)
 }
 ?]
