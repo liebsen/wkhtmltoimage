@@ -46,7 +46,7 @@ app.post('/capture', (req, res) => {
         noStopSlowScripts: true,
         javascriptDelay: 5000
       }, (code, signal) => {
-        // shot ok
+        // image ok
         res.json({
           success: true,
           url: url,
@@ -76,7 +76,7 @@ app.get('/:view', (req, res) => {
     connection.query(`SELECT * FROM captures WHERE uuid = '${req.params.view}' AND enabled = 1`, function (error, results, fields) {
       if (error) throw error
       if (results[0]) {
-        res.render(`${__dirname}/views/shot.ejs`, { data: results[0] })
+        res.render(`${__dirname}/views/image.ejs`, { data: results[0] })
       } else {
         res.render(`${__dirname}/views/notfound.ejs`)  
       }      
@@ -92,8 +92,8 @@ app.get('/r/:uuid', (req, res) => {
     var data = {
       success: false,
       status: 'danger',
-      title: 'Remove shot',
-      message: 'Something wrong happened while trying to remove this shot. Please tray again later.'
+      title: 'Remove image',
+      message: 'Something wrong happened while trying to remove this image. Please tray again later.'
     }
     var filepath = `${__dirname}${uploads_folder}${req.params.uuid}.jpg`
     fs.unlink(filepath, function(err) {
@@ -105,7 +105,7 @@ app.get('/r/:uuid', (req, res) => {
         // other errors, e.g. maybe we don't have enough permission
         data.message = `Error occurred while trying to remove file`
       } else {
-        data.message = `The shot was successfully removed from the system`
+        data.message = `The image was successfully removed from the system`
         data.status = 'success'
       }
       res.render(`${__dirname}/views/page.ejs`, {
