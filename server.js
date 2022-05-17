@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid')
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = '/public/captures/'
 const port = 5555
+
 var connection = mysql.createConnection({
   host     : process.env.DB_HOST,
   user     : process.env.DB_USER,
@@ -42,7 +43,11 @@ app.post('/capture', (req, res) => {
       console.log('The query ran good', results);
     })    
     // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-    return wkhtmltoimage.generate(url, { output: filepath }, (code, signal) => {
+    return wkhtmltoimage.generate(url, {
+      output: filepath,
+      noStopSlowScripts: true
+      // 'javascript-delay': 3
+    }, (code, signal) => {
       res.json({
         success: true,
         url: url,
