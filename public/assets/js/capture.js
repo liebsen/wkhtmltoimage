@@ -14,26 +14,12 @@ function isValidHttpUrl(string) {
 function capture () {
   let url = document.getElementById('capture_url').value
   var img = document.querySelector('img')
-  const button = document.querySelector('.send-btn')
-  let data = {
-    url: url
-  }
+  let data = { url: url }
 
-  function start_loading (data) {
-    button.classList.add('is-loading')    
-    document.querySelector('.capture-container').classList.add('is-loading')
-    var img = document.getElementById('img_loader');
-    var capture_url = `/captures/${data.uuid}.jpg`
-    console.log("The image is loading...")
-    img.onload = function () {
-      document.querySelector('.capture-container').classList.remove('is-loading')
-      document.querySelector('.capture-img').style.backgroundImage = `url(${capture_url})`
-      button.classList.remove('is-loading')
-      console.log("The image has loaded!")
-    }
-    setTimeout(function(){
-      img.src = capture_url
-    }, 200)
+  /* validate */
+  if (!isValidHttpUrl(url)) {
+    alert('Please enter a valid URL.')
+    return document.getElementById('capture_url').focus()
   }
 
   var request = new Request('/capture', {
@@ -47,12 +33,28 @@ function capture () {
 
   fetch(request).then(res => res.json()).then(data => {
 
-    /* validate */
-    if (!isValidHttpUrl(data.url)) {
-      alert('Please enter a valid URL.')
-      return document.getElementById('capture_url').focus()
-    }
 
-    start_loading(data)
+    capture_loading(data)
   })
+}
+
+function capture_loading (data) {
+  const button = document.querySelector('.send-btn')
+  var img = document.getElementById('img_loader');
+  var capture_url = `/captures/${data.uuid}.jpg`
+
+  button.classList.add('is-loading')    
+  document.querySelector('.capture-container').classList.add('is-loading')
+  console.log("The image is loading...")
+
+  img.onload = function () {
+    document.querySelector('.capture-container').classList.remove('is-loading')
+    document.querySelector('.capture-img').style.backgroundImage = `url(${capture_url})`
+    button.classList.remove('is-loading')
+    console.log("The image has loaded!")
+  }
+
+  setTimeout(function(){
+    img.src = capture_url
+  }, 200)
 }
