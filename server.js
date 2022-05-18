@@ -45,7 +45,7 @@ app.post('/capture', (req, res) => {
         output: filepath,
         noStopSlowScripts: true,
         javascriptDelay: 5000,
-        viewportSize '1280x1024',
+        viewportSize: '1280x1024',
         orientation: 'Landscape'
       }, (code, signal) => {
         // image ok
