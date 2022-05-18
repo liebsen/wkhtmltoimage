@@ -1,0 +1,27 @@
+
+.capture-img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0.5rem;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100%;
+  background-image: url(/assets/images/flat-browser-psd.jpg);
+  background-color: #867798;
+  /* background: #e4ecf9; */
+  /* border: 3px solid whitesmoke; */
+  border-radius: 0.75rem;
+  min-height: 25rem;
+  box-shadow: 1px 1px 5px 0 rgba(26, 26, 67, .05), 39px 62.5px 125px -25px rgba(50, 50, 93, .2), 23.4px 37.5px 75px -37.5px rgba(0, 0, 0, .4);
+}
+
+.capture-img.is-small {
+  min-height: 15rem;
+}
+
+@media screen and (min-width:768px) {
+  .capture-img {
+    transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);
+  }
+}

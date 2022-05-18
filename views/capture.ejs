@@ -1,6 +1,7 @@
 [?- include ('./partials/header') ?]
 [?- include ('./partials/navbar') ?]
   <section class="hero">
+    <link href="/assets/css/capture.css" rel="stylesheet"> 
     <div class="hero-body">
       <div class="container">
         <div class="columns">
@@ -18,7 +19,10 @@
             </div>
           </div>
           <div class="column">
-            <div class="capture-img"></div>
+            <div class="control capture-container">
+              <div class="capture-img"></div>
+              <img id="img_loader" src="" class="is-hidden" />
+            </div>
           </div>
         </div>
       </div>
