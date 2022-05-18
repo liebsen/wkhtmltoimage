@@ -12,6 +12,7 @@ function isValidHttpUrl(string) {
 }
 
 function capture () {
+  const button = document.querySelector('.send-btn')
   let url = document.getElementById('capture_url').value
   var img = document.querySelector('img')
   let data = { url: url }
@@ -31,6 +32,9 @@ function capture () {
     }
   })
 
+  button.classList.add('is-loading')
+  document.querySelector('.capture-container').classList.add('is-loading')
+
   fetch(request).then(res => res.json()).then(e => {
     capture_loading(e)
   })
@@ -40,9 +44,6 @@ function capture_loading (data) {
   const button = document.querySelector('.send-btn')
   var img = document.getElementById('img_loader');
   var capture_url = `/captures/${data.uuid}.jpg`
-
-  button.classList.add('is-loading')    
-  document.querySelector('.capture-container').classList.add('is-loading')
   console.log("The image is loading...")
 
   img.onload = function () {
