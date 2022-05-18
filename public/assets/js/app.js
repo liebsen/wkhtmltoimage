@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const $pathname = location.pathname
 
   document.querySelectorAll('.navbar-item').forEach(item => {
-    item.classList.remove('has-background-primary', 'has-text-white')
+    item.classList.remove('has-background-info', 'has-text-white')
     if ($pathname === item.getAttribute('href') && $pathname !== '/') {
-      item.classList.add('has-background-primary', 'has-text-white')
+      item.classList.add('has-background-info', 'has-text-white')
     }
   })
 
