@@ -31,10 +31,8 @@ function capture () {
     }
   })
 
-  fetch(request).then(res => res.json()).then(data => {
-
-
-    capture_loading(data)
+  fetch(request).then(res => res.json()).then(e => {
+    capture_loading(e)
   })
 }
 
