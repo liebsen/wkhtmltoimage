@@ -1,7 +1,17 @@
 body {
   font-family: 'Poppins', sans-serif;
-  padding-top: 3.5rem;
+  padding-top: 5.5rem;
 }
+
+pre {
+  white-space: break-spaces;
+  border-radius: 0.25rem;
+}
+
+.shadow {
+  box-shadow: 3px 3px 0 rgba(50, 50, 50, 0.1);
+}
+
 .hero {
   padding-bottom: 3rem;
 }
@@ -27,7 +37,7 @@ body {
   width: 9rem;
   display: block;
   padding-top: 86%;
-  background: #0679e4;
+  background: #ddd;
   transition: all 0.25s ease;
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   /*clip-path: polygon(50% 0, 80% 100%, 0 70%); */
