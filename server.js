@@ -44,9 +44,9 @@ app.post('/capture', (req, res) => {
       return wkhtmltoimage.generate(url, {
         output: filepath,
         noStopSlowScripts: true,
-        javascriptDelay: 5000,
-        viewportSize: '1280x1024',
-        orientation: 'Landscape'
+        javascriptDelay: 5000
+        // viewportSize: '1280x1024',
+        // orientation: 'Landscape'
       }, (code, signal) => {
         // image ok
         res.json({
