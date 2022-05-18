@@ -64,12 +64,16 @@ app.post('/capture', (req, res) => {
 })
 
 app.get('/', (req, res) => {
+  res.render(`${__dirname}/views/index.ejs`)
+})
+
+app.get('/images', (req, res) => {
   connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC`, function (error, results, fields) {
     if (error) throw error
-    res.render(`${__dirname}/views/index.ejs`, {
+    res.render(`${__dirname}/views/images.ejs`, {
       files: results
     })
-  })    
+  })
 })
 
 app.get('/:view', (req, res) => {

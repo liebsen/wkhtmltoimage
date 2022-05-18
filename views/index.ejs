@@ -4,19 +4,27 @@
   <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">  
-          html<i>to</i>image API v1.0.0
-        </h1>
-        <div class="columns is-multiline">
-          [? for (var i in files) { ?]
-          <div class="column is-6 is-4-desktop is-3-widescreen">
-            <a href="/[?= files[i].uuid ?]">
-              <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(`${files[i].uuid}.jpg`) ?])">
-                <span class="tag is-rounded">[?= extractFQD(files[i].url) ?]</span>
+        <div class="columns">
+          <div class="column is-5">
+            <h1 class="title">
+              html<i>to</i>image API v1.0.0
+            </h1>
+            <div class="content">
+              <p>Welcome to Captures a simple Application Programming Interface for printing website. If you are a developer please check Github is on the menu.</p>
+              <p>The future of the internet depends on us all</p>
+              <div class="buttons is-centered">
+                <a href="/images" class="button is-info">
+                  <span class="has-text-weight-bold">See images</span>
+                </a>
+                <a href="/capture" class="button is-success">
+                  <span class="has-text-weight-bold">Capture</span>
+                </a>
               </div>
-            </a>
+            </div>
           </div>
-          [? } ?]
+          <div class="column">
+            <div class="capture-img" style="background-image: url(/assets/images/flat-captures.jpg)"></div>
+          </div>
         </div>
       </div>
     </div>
