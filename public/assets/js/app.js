@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.navbar-item').forEach(item => {
     item.classList.remove('has-background-info', 'has-text-white')
-    if ($pathname === item.getAttribute('href') && $pathname !== '/') {
+    if ($pathname === item.getAttribute('href')) {
       item.classList.add('has-background-info', 'has-text-white')
     }
   })

@@ -1,14 +1,59 @@
 body {
   font-family: 'Poppins', sans-serif;
+  padding-top: 3.5rem;
 }
 .hero {
   padding-bottom: 3rem;
 }
-.navbar-brand .navbar-item:nth-child(1) {
-  min-width: 8rem;
+
+.navbar-brand-img {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.25rem;
+  display: inline-block;
+  width: 150px;
 }
 
-.navbar-item img {
+.navbar-brand-img svg path {
+  fill: white;
+  transition: all 0.25s ease;
+}
+
+.navbar-brand-img::before {
+  content: "";
+  position: absolute;
+  left: -3rem;
+  top: -2.5rem;
+  width: 9rem;
+  display: block;
+  padding-top: 86%;
+  background: #0679e4;
+  transition: all 0.25s ease;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  /*clip-path: polygon(50% 0, 80% 100%, 0 70%); */
+  /* clip-path: polygon(50% 0, 100% 100%, 0 100%); */
+}
+
+.navbar-brand .navbar-item:nth-child(2) {
+  margin-left: 8rem;
+}
+
+.navbar-brand-link {
+  min-width: 9rem;
+}
+
+.navbar-brand-link.has-background-info {
+  background-color: transparent!important;
+}
+
+.navbar-brand-link.has-background-info .navbar-brand-img svg path {
+  fill: #0679e4;
+}
+.navbar-brand-link.has-background-info .navbar-brand-img::before {
+  background: #f8f8f8;
+}
+
+.navbar-item svg {
   position: absolute;
   top: 0.25rem;
   max-height: 4.25rem;
