@@ -41,7 +41,6 @@ app.post('/capture', (req, res) => {
     return connection.query(sql, function (error, results, fields) {
       if (error) throw error;
       // sql ok
-      // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
       return exec(`wkhtmltoimage ${url} ${filepath}`, (err, stdout, stderr) => {
         if (err) {
           console.log(err)
@@ -53,20 +52,6 @@ app.post('/capture', (req, res) => {
           })
         }
       })
-        /* return wkhtmltoimage.generate(url, {
-          output: filepath,
-          noStopSlowScripts: true,
-          javascriptDelay: 5000
-          // viewportSize: '1280x1024',
-          // orientation: 'Landscape'
-        }, (code, signal) => {
-          // image ok
-          res.json({
-            success: true,
-            url: url,
-            uuid: uuid
-          })
-        }) */
     })    
   }
   res.json({
