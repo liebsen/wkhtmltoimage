@@ -5,6 +5,7 @@ const cors = require('cors')
 const ejs = require('ejs')
 var fs = require('fs')
 var mysql = require('mysql2')
+const { exec } = require('child_process')
 const { v4: uuidv4 } = require('uuid')
 const wkhtmltoimage = require('wkhtmltoimage')
 const uploads_folder = '/public/captures/'
@@ -41,25 +42,36 @@ app.post('/capture', (req, res) => {
       if (error) throw error;
       // sql ok
       // filename = url.replace(/[^a-z0-9]/gi, '_').toLowerCase()
-      return wkhtmltoimage.generate(url, {
-        output: filepath,
-        noStopSlowScripts: true,
-        javascriptDelay: 5000
-        // viewportSize: '1280x1024',
-        // orientation: 'Landscape'
-      }, (code, signal) => {
-        // image ok
-        res.json({
-          success: true,
-          url: url,
-          uuid: uuid
-        })
+      return exec(`wkhtmltoimage ${url} ${filepath}`, (err, stdout, stderr) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.json({
+            success: true,
+            url: url,
+            uuid: uuid
+          })
+        }
       })
+        /* return wkhtmltoimage.generate(url, {
+          output: filepath,
+          noStopSlowScripts: true,
+          javascriptDelay: 5000
+          // viewportSize: '1280x1024',
+          // orientation: 'Landscape'
+        }, (code, signal) => {
+          // image ok
+          res.json({
+            success: true,
+            url: url,
+            uuid: uuid
+          })
+        }) */
     })    
   }
   res.json({
     success: false,
-    filename: `${filename}.jpg`
+    url: url
   })
 })
 
