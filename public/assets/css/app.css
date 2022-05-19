@@ -18,6 +18,7 @@ pre {
 .hero {
   background-color: whitesmoke;
   padding-bottom: 3rem;
+  min-height: 100%;
 }
 
 .navbar-brand-link svg {
