@@ -35,6 +35,7 @@ app.post('/capture', (req, res) => {
   var uuid = ''
   var filepath = ''
   if (url) {
+    url.trim()
     uuid = uuidv4()
     filepath = `${__dirname}${uploads_folder}${uuid}.jpg`
     let sql = `INSERT INTO captures SET uuid = '${uuid}', url = '${url}', created = NOW(), updated = NOW(), enabled = 1`
@@ -60,34 +61,6 @@ app.post('/capture', (req, res) => {
   })
 })
 
-app.get('/', (req, res) => {
-  res.render(`${__dirname}/views/index.ejs`)
-})
-
-app.get('/images', (req, res) => {
-  connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC`, function (error, results, fields) {
-    if (error) throw error
-    res.render(`${__dirname}/views/images.ejs`, {
-      files: results
-    })
-  })
-})
-
-app.get('/:view', (req, res) => {
-  const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
-  if(regexExp.test(req.params.view)) {
-    connection.query(`SELECT * FROM captures WHERE uuid = '${req.params.view}' AND enabled = 1`, function (error, results, fields) {
-      if (error) throw error
-      if (results[0]) {
-        res.render(`${__dirname}/views/image.ejs`, { data: results[0] })
-      } else {
-        res.render(`${__dirname}/views/notfound.ejs`)  
-      }      
-    })
-  } else {
-    res.render(`${__dirname}/views/${req.params.view}.ejs`)
-  }
-})
 
 app.get('/r/:uuid', (req, res) => {
   connection.query(`DELETE FROM captures WHERE uuid = '${req.params.uuid}'`, function (error, results, fields) {
@@ -117,6 +90,36 @@ app.get('/r/:uuid', (req, res) => {
     })
   })    
 })
+
+app.get('/', (req, res) => {
+  res.render(`${__dirname}/views/index.ejs`)
+})
+
+app.get('/images', (req, res) => {
+  connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC LIMIT 20`, function (error, results, fields) {
+    if (error) throw error
+    res.render(`${__dirname}/views/images.ejs`, {
+      files: results
+    })
+  })
+})
+
+app.get('/:view', (req, res) => {
+  const regexExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi
+  if(regexExp.test(req.params.view)) {
+    connection.query(`SELECT * FROM captures WHERE uuid = '${req.params.view}' AND enabled = 1`, function (error, results, fields) {
+      if (error) throw error
+      if (results[0]) {
+        res.render(`${__dirname}/views/image.ejs`, { data: results[0] })
+      } else {
+        res.render(`${__dirname}/views/notfound.ejs`)  
+      }      
+    })
+  } else {
+    res.render(`${__dirname}/views/${req.params.view}.ejs`)
+  }
+})
+
 
 app.listen(port, () => {
   console.log(`App listening to ${port}`)
