@@ -3,8 +3,7 @@ html, body {
 }
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: whitesmoke;
-  padding-top: 4rem;
+  padding-top: 3.25rem;
 }
 
 pre {
@@ -17,6 +16,7 @@ pre {
 }
 
 .hero {
+  background-color: whitesmoke;
   padding-bottom: 3rem;
 }
 
