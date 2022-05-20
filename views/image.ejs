@@ -10,17 +10,16 @@
               [?= extractFQD(data.url) ?]
             </h1>
             <div class="notification is-white has-text-weight-bold shadow">
-              [?= data.url ?]<br>
+              <a href="[?= data.url ?]" target="_blank">
+                [?= data.url ?]
+              </a><br>
               [?= data.created ?]  
             </div>
             <div class="buttons is-centered">
               <a href="/images" class="button is-white">
                 <span class="has-text-weight-bold">↖ </span>
               </a>
-              <a href="[?= data.url ?]" class="button is-info" target="_blank">
-                <span class="has-text-weight-bold">Visit</span>
-              </a>
-              <a href="/capture" class="button is-danger">
+              <a href="/capture" class="button is-info">
                 <span class="has-text-weight-bold">Capture</span>
               </a>
               <a href="#" class="button is-success" onclick="copyClipboard('[?= data.url ?]')">
