@@ -42,7 +42,7 @@ app.post('/capture', (req, res) => {
     return connection.query(sql, function (error, results, fields) {
       if (error) throw error;
       // sql ok
-      return exec(`wkhtmltoimage ${url} ${filepath}`, (err, stdout, stderr) => {
+      return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
         if (err) {
           console.log(err)
         } else {
