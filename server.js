@@ -34,6 +34,7 @@ app.post('/capture', (req, res) => {
   var success = false
   var uuid = ''
   var filepath = ''
+
   if (url) {
     url.trim()
     uuid = uuidv4()
