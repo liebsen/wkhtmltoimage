@@ -33,10 +33,11 @@ app.post('/contact', (req, res) => {
   let pairs = []
   let values = ''
   for (var i in req.body) {
-    pairs.push(`${i} = '${req.body[i]}'`)
+    let e = connection.escape(req.body[i])
+    pairs.push(`${i} = ${e}`)
   }
   values = pairs.join(', ')
-  let sql = `INSERT INTO contacts SET ${values}, created = NOW()`
+  let sql = `INSERT INTO contacts SET id = DEFAULT, ${values}, created = NOW()`
   return connection.query(sql, function (error, results, fields) {
     if (error) throw error;
     // sql ok
