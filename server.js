@@ -29,6 +29,24 @@ app.use(express.json())
 app.use(cors())
 app.set('view engine', 'ejs')
 
+app.post('/contact', (req, res) => {
+  let pairs = []
+  let values = ''
+  for (var i in req.body) {
+    pairs.push(`${i} = '${req.body[i]}'`)
+  }
+  values = pairs.join(', ')
+  let sql = `INSERT INTO contacts SET ${values}, created = NOW()`
+  return connection.query(sql, function (error, results, fields) {
+    if (error) throw error;
+    // sql ok
+    res.json({
+      success: true,
+      message: 'Your message has been sent. Thank you for taking the time to contact us.'
+    })
+  })
+})
+
 app.post('/capture', (req, res) => {
   var url = req.body.url
   var success = false

@@ -1,0 +1,51 @@
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-5">
+            <h1 class="title">
+              Contact <i>us</i>
+            </h1>
+            <div class="content">
+              <p>We are here to build and help build a more free and easy to use inernet. Please take your time to fill this form. You can also send us an email at overlemonsoft (at) gmail.com.</p>
+              <br>
+              <form class="form" onsubmit="return sendMessage(this)">
+                <div class="columns">
+                  <div class="column">
+                    <div class="field">
+                      <input type="text" class="input" max-length="100" name="full_name" placeholder="Your name" required />
+                    </div>
+                    <div class="field">
+                      <input type="email" class="input" max-length="100" name="email" placeholder="********" required />
+                    </div>
+                    <div class="field">
+                      <input type="text" class="input" max-length="100" name="subject" placeholder="Subject" name="subject" required />
+                    </div>
+                  </div>  
+                  <div class="column">
+                    <div class="field">
+                      <textarea class="textarea" name="text" max-length="5000" placeholder="Type your message..." required></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="buttons is-right">
+                  <div class="control">
+                    <button type="submit" class="button is-primary">Send message</button>
+                  </div>
+                </div>
+              </form>
+              <div class="message-text notification is-hidden">                
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="capture-img" style="background-image: url(/assets/images/flat-captures.jpg)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/contact.js"></script>
+  </section>
+[?- include ('./partials/footer') ?]
