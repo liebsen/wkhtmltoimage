@@ -3,7 +3,7 @@ html, body {
 }
 body {
   font-family: 'Poppins', sans-serif;
-  padding-top: 3.75rem;
+  padding-top: 3.5rem;
 }
 
 pre {
@@ -58,9 +58,9 @@ pre {
   background-color: transparent!important;
 }
 .navbar-brand-link.has-background-light svg {
-  left: 0.5rem;
-  top: 0.5rem;
-  transform: scale(2);
+  left: -0.25rem;
+  top: -0.25rem;
+  transform: scale(1.5);
   background-color: #e73c7e;
 }
 /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
