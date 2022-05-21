@@ -1,24 +1,27 @@
 [?- include ('./partials/functions') ?]
 [?- include ('./partials/header') ?]
 [?- include ('./partials/navbar') ?]
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">  
-          Images
-        </h1>
-        <div class="columns is-multiline">
-          [? for (var i in files) { ?]
-          <div class="column is-6 is-4-desktop is-3-widescreen">
-            <a href="/[?= files[i].uuid ?]">
-              <div class="capture-img is-small" style="background-image: url(/captures/[?= encoderURI(`${files[i].uuid}.jpg`) ?])">
-                <span class="tag is-rounded">[?= extractFQD(files[i].url) ?]</span>
+    <section class="splide" aria-label="Splide Basic HTML Example">
+      <div class="splide__track">
+        <ul class="splide__list">
+          [? for (var i in items) { ?]
+          <li class="splide__slide">
+            <a href="/[?= items[i].uuid ?]">
+              <div class="capture-img is-carousel" style="background-image: url(/captures/[?= encoderURI(`${items[i].uuid}.jpg`) ?])">
+                <div class="capture-data">
+                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
+                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
+                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
+                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
+                </div>
               </div>
-            </a>
-          </div>
+            </a>                
+          </li>
           [? } ?]
-        </div>
+        </ul>
       </div>
-    </div>
+    </section>        
+    <script src="/assets/js/splide.min.js"></script>
+    <script src="/assets/js/splide.js"></script>
   </section>
 [?- include('./partials/footer') ?]

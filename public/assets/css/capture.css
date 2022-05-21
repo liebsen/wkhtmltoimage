@@ -21,8 +21,9 @@
   filter: contrast(1.25);
 }
 
-.capture-img.is-small {
-  min-height: 15rem;
+.capture-img.is-carousel {
+  min-height: calc(100vh - 3.5rem);
+  transform: scale(0.75) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);
 }
   
 @media screen and (min-width:768px) {

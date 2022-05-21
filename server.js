@@ -58,22 +58,48 @@ app.post('/capture', (req, res) => {
     url.trim()
     uuid = uuidv4()
     filepath = `${__dirname}${uploads_folder}${uuid}.jpg`
-    let sql = `INSERT INTO captures SET uuid = '${uuid}', url = '${url}', created = NOW(), updated = NOW(), enabled = 1`
-    return connection.query(sql, function (error, results, fields) {
-      if (error) throw error;
-      // sql ok
-      return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
-        if (err) {
-          console.log(err)
-        } else {
-          res.json({
-            success: true,
-            url: url,
-            uuid: uuid
-          })
+    // paths ok gather geoip
+    let ip = req.header('x-forwarded-for') || '181.209.106.242'
+    return exec(`./iplookup ${ip}`, (err, stdout, stderr) => {
+      let locale = []
+      if (err) {
+        console.log(err)
+      } else {
+        const parts = stdout.split("\t")
+        saveObj = {
+          uuid: uuid,
+          url: url,
+          ip: ip,
+          country: parts[0].split(' ')[1],
+          country_iso: parts[1].toLowerCase(),
+          city: parts[2],
+          region: parts[3],
+          lat: parts[4],
+          lng: parts[5].replace('\n', '')
         }
-      })
-    })    
+        let pairs = []
+        let values = ''
+        for (var i in saveObj) {
+          pairs.push(`${i} = ${connection.escape(saveObj[i])}`)
+        }
+        values = pairs.join(', ')        
+        return connection.query(`INSERT INTO captures SET id = DEFAULT, ${values}, created = NOW(), updated = NOW(), enabled = 1`, function (error, results, fields) {
+          if (error) throw error;
+          // database ok proceed to generate
+          return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
+            if (err) {
+              console.log(err)
+            } else {
+              res.json({
+                success: true,
+                url: url,
+                uuid: uuid
+              })
+            }
+          })
+        })    
+      }
+    })
   }
   res.json({
     success: false,
@@ -119,7 +145,7 @@ app.get('/images', (req, res) => {
   connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY id DESC LIMIT 20`, function (error, results, fields) {
     if (error) throw error
     res.render(`${__dirname}/views/images.ejs`, {
-      files: results
+      items: results
     })
   })
 })
