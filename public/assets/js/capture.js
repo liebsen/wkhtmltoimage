@@ -47,9 +47,13 @@ function capture_loading (data) {
   console.log("The image is loading...")
 
   img.onload = function () {
+    button.classList.remove('is-loading')
     document.querySelector('.capture-container').classList.remove('is-loading')
     document.querySelector('.capture-img').style.backgroundImage = `url(${capture_url})`
-    button.classList.remove('is-loading')
+    document.querySelector('.capture-img').classList.remove('skewInDesktop')
+    setTimeout(() => {
+      document.querySelector('.capture-img').classList.add('skewInDesktop')
+    }, 1)
     console.log("The image has loaded!")
   }
 
