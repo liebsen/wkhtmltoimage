@@ -11,6 +11,19 @@ pre {
   border-radius: 0.25rem;
 }
 
+/* tabs */
+
+.tabs {
+  margin-bottom: 0!important;
+}
+.tabs.is-boxed li a {
+  border: none;
+}
+
+.tab-block {
+  display: none;
+}
+
 .shadow {
   box-shadow: 3px 3px 0 rgba(50, 50, 50, 0.1);
 }

@@ -12,8 +12,23 @@
               <p>This project is no meant to be object of further development and / or maintained in the future.</p>
             </div>
 
-<pre class="shadow has-background-white">
-<span class="tag is-success">POST</span>
+            <div class="tabs is-boxed">
+              <ul>
+                <li class="is-active">
+                  <a href="#scheme">
+                    <span class="has-text-weight-semibold">Scheme</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#curl">
+                    <span class="has-text-weight-semibold">CURL</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="tab-block scheme">
+              <pre class="shadow has-background-white"<span class="tag is-success">POST</span>
 
 https://captures.icehub.link/capture 
 
@@ -27,11 +42,12 @@ res: {
   uuid: 'a0b9e588-1cfb-4687-a598-e2cb8d6d0d6b'
 }
 </pre>
-<br>
-<pre class="shadow has-background-white">
-<span class="tag is-success">CURL</span>
+            </div>
+            <div class="tab-block curl">
+              <pre class="shadow has-background-white"><span class="tag is-success">CURL</span>
 
 curl 'https://captures.icehub.link/capture' -X POST -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0' -H 'Accept: application/json' -H 'Accept-Language: es-AR,es;q=0.8,en-US;q=0.5,en;q=0.3' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://captures.icehub.link/capture' -H 'Content-Type: application/json' -H 'Origin: https://captures.icehub.link' -H 'Connection: keep-alive' -H 'Sec-Fetch-Dest: empty' -H 'Sec-Fetch-Mode: cors' -H 'Sec-Fetch-Site: same-origin' --data-raw '{"url":"https://captures.icehub.link"}'</pre>
+            </div>
           </div>
           <div class="column">
             <div class="capture-img" style="background-image: url(/assets/images/flat-captures.jpg)"></div>
@@ -39,6 +55,6 @@ curl 'https://captures.icehub.link/capture' -X POST -H 'User-Agent: Mozilla/5.0 
         </div>
       </div>
     </div>
-    <script src="/assets/js/capture.js"></script>
+    <script src="/assets/js/tabs.js"></script>
   </section>
 [?- include ('./partials/footer') ?]
