@@ -29,9 +29,14 @@ pre {
 }
 
 .hero {
+  justify-content: center;
   background-color: whitesmoke;
   padding-bottom: 3rem;
   min-height: 100%;
+}
+
+.hero-body {
+  flex-grow: 0;
 }
 
 .navbar-brand-link svg {
