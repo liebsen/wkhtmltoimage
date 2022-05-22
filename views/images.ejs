@@ -10,9 +10,7 @@
               <div class="capture-img is-carousel" style="background-image: url(/captures/[?= encoderURI(`${items[i].uuid}.jpg`) ?])">
                 <div class="capture-data">
                   <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
-                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
-                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
-                  <span class="tag is-rounded">[?= extractFQD(items[i].url) ?]</span>
+                  <span class="tag is-rounded">[?= items[i].country ?] [?= items[i].region ?] [?= items[i].city ?]</span>
                 </div>
               </div>
             </a>                
