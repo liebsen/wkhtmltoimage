@@ -1,9 +1,10 @@
 html, body {
   height: 100%;
 }
+
 body {
   font-family: 'Poppins', sans-serif;
-  padding-top: 3.5rem;
+  padding-top: 1.5rem;
 }
 
 pre {
@@ -16,6 +17,7 @@ pre {
 .tabs {
   margin-bottom: 0!important;
 }
+
 .tabs.is-boxed li a {
   border: none;
 }
@@ -62,12 +64,14 @@ pre {
 .navbar-brand-link.has-background-light {
   background-color: transparent!important;
 }
+
 .navbar-brand-link.has-background-light svg {
   left: -0.25rem;
   top: -0.25rem;
   transform: scale(1.5);
   background-color: #e73c7e;
 }
+
 /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
 .navbar-brand-link.has-background-light svg path {
   fill: white;
@@ -82,9 +86,11 @@ pre {
   font-weight: 700;
   color: #999;
 }
+
 .space-evenly {
   justify-content: space-evenly!important;
 }
+
 .has-border-right-square {
   border-bottom-right-radius: 0!important;
   border-top-right-radius: 0!important;

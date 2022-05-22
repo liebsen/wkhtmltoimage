@@ -22,7 +22,7 @@
 }
 
 .capture-img.is-carousel {
-  min-height: calc(100vh - 3.5rem);
+  min-height: 100vh;
   transform: scale(0.75) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);
 }
   
