@@ -49,15 +49,15 @@ function capture_loading (data) {
   img.onload = function () {
     button.classList.remove('is-loading')
     document.querySelector('.capture-container').classList.remove('is-loading')
-    document.querySelector('.capture-img').style.backgroundImage = `url(${capture_url})`
     document.querySelector('.capture-img').classList.remove('skewInDesktop')
     setTimeout(() => {
       document.querySelector('.capture-img').classList.add('skewInDesktop')
-    }, 1)
+    }, 100)
+    document.querySelector('.capture-img').style.backgroundImage = `url(${capture_url})`
     console.log("The image has loaded!")
   }
 
   setTimeout(function(){
     img.src = capture_url
-  }, 200)
+  }, 500)
 }
