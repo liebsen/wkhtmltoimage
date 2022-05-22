@@ -122,7 +122,12 @@ app.get('/r/:uuid', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.render(`${__dirname}/views/index.ejs`)
+  connection.query(`SELECT * FROM captures WHERE enabled = 1 ORDER BY RAND() LIMIT 1`, function (error, results, fields) {
+    if (error) throw error
+    res.render(`${__dirname}/views/index.ejs`, {
+      item: results[0]
+    })
+  })
 })
 
 app.get('/images', (req, res) => {
