@@ -20,14 +20,16 @@
               [?= data.created ?]  
             </div>
             <div class="buttons is-centered">
-              <a href="/images" class="button is-white">
+              <a href="/images" class="button is-large is-white">
                 <span class="has-text-weight-bold">↖ </span>
               </a>
-              <a href="/capture" class="button is-info">
-                <span class="has-text-weight-bold">Capture</span>
-              </a>
-              <a href="#" class="button is-success" onclick="copyClipboard('[?= data.url ?]')">
+              <a href="#" class="button is-large is-success" onclick="copyClipboard('[?= data.url ?]')">
                 <span class="has-text-weight-bold">Share</span>
+              </a>
+              <a href="/capture" class="button is-large is-info">
+                <span class="has-text-weight-bold">
+                  <span class="mdi mdi-creation"></span>
+                </span>
               </a>
             </div>
           </div>
