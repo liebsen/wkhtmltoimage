@@ -5,6 +5,7 @@ const cors = require('cors')
 const ejs = require('ejs')
 var fs = require('fs')
 var mysql = require('mysql2')
+var tools = require('./tools')
 const { exec } = require('child_process')
 const { v4: uuidv4 } = require('uuid')
 const wkhtmltoimage = require('wkhtmltoimage')
@@ -30,21 +31,22 @@ app.use(cors())
 app.set('view engine', 'ejs')
 
 app.post('/contact', (req, res) => {
-  let pairs = []
-  let values = ''
-  for (var i in req.body) {
-    let e = connection.escape(req.body[i])
-    pairs.push(`${i} = ${e}`)
-  }
-  values = pairs.join(', ')
-  let sql = `INSERT INTO contacts SET id = DEFAULT, ${values}, created = NOW()`
-  return connection.query(sql, function (error, results, fields) {
-    if (error) throw error;
-    // sql ok
-    res.json({
-      success: true,
-      message: 'Your message has been sent. Thank you for taking the time to contact us.'
-    })
+  let ip = req.header('x-forwarded-for') || '181.209.106.242'
+  return exec(`./iplookup ${ip}`, (err, stdout, stderr) => {
+    if (err) {
+      console.log(err)
+    } else {
+      var values = tools.buildSql(req.body, ip, stdout, connection)
+      let sql = `INSERT INTO contacts SET id = DEFAULT, ${values}, created = NOW()`
+      return connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        // sql ok
+        res.json({
+          success: true,
+          message: 'Your message has been sent. Thank you for taking the time to contact us.'
+        })
+      })
+    }
   })
 })
 
@@ -61,28 +63,10 @@ app.post('/capture', (req, res) => {
     // paths ok gather geoip
     let ip = req.header('x-forwarded-for') || '181.209.106.242'
     return exec(`./iplookup ${ip}`, (err, stdout, stderr) => {
-      let locale = []
       if (err) {
         console.log(err)
       } else {
-        const parts = stdout.split("\t")
-        saveObj = {
-          uuid: uuid,
-          url: url,
-          ip: ip,
-          country: parts[0].split(' ')[1],
-          country_iso: parts[1].toLowerCase(),
-          city: parts[2],
-          region: parts[3],
-          lat: parts[4],
-          lng: parts[5].replace('\n', '')
-        }
-        let pairs = []
-        let values = ''
-        for (var i in saveObj) {
-          pairs.push(`${i} = ${connection.escape(saveObj[i])}`)
-        }
-        values = pairs.join(', ')        
+        var values = tools.buildSql({ uuid: uuid, url: url }, ip, stdout, connection)
         return connection.query(`INSERT INTO captures SET id = DEFAULT, ${values}, created = NOW(), updated = NOW(), enabled = 1`, function (error, results, fields) {
           if (error) throw error;
           // database ok proceed to generate
