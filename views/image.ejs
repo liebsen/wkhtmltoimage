@@ -32,13 +32,17 @@
             </div>
           </div>
           <div class="column">
-            <a href="[?= encoderURI(data.url) ?]" target="_blank">
-              <div class="capture-img animated skewInDesktop" style="background-image: url(/captures/[?= data.uuid ?].jpg)"></div>
-            </a>
+            <div class="control capture-container is-loading">
+              <a href="[?= encoderURI(data.url) ?]" target="_blank">
+                <div class="capture-img animated"></div>
+                <img id="img_loader" class="is-hidden" src="/captures/[?= data.uuid ?].jpg" />
+              </a>
+            </div>
           </div>
         </div>
       </div>      
     </div>
-    <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/functions.js"></script>
+    <script src="/assets/js/image.js"></script>
   </section>
 [?- include ('./partials/footer') ?]
