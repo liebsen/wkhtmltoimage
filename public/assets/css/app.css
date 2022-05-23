@@ -12,6 +12,9 @@ pre {
   border-radius: 0.25rem;
 }
 
+.navbar-dropdown {
+  border-top: 3px solid #dbdbdb;
+}
 /* tabs */
 
 .tabs {
