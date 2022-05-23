@@ -4,7 +4,7 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-vcentered">
-          <div class="column is-7">
+          <div class="column is-5">
             <h1 class="title">
               Contact <i>us</i>
             </h1>
@@ -14,32 +14,26 @@
               <form class="form box animated scaleInSoft" onsubmit="return sendMessage(this)">
                 <h4>Please fill the form</h4>
                 <p>Please take your time to fill this form. You can also send us an email at overlemonsoft (at) gmail.com.</p>
-                <div class="columns">
-                  <div class="column">
-                    <div class="field">
-                      <input type="text" class="input" max-length="100" name="full_name" placeholder="Your name" required />
-                    </div>
-                    <div class="field">
-                      <input type="email" class="input" max-length="100" name="email" placeholder="Your email" required />
-                    </div>
-                    <div class="field">
-                      <input type="text" class="input" max-length="100" name="subject" placeholder="Subject of this contact" name="subject" required />
-                    </div>
-                  </div>  
-                  <div class="column">
-                    <div class="field">
-                      <textarea class="textarea" name="text" max-length="5000" placeholder="Type your message..." required></textarea>
-                    </div>
-                  </div>
+                <div class="field">
+                  <input type="text" class="input" max-length="100" name="full_name" placeholder="Your name" required />
+                </div>
+                <div class="field">
+                  <input type="email" class="input" max-length="100" name="email" placeholder="Your email" required />
+                </div>
+                <div class="field">
+                  <input type="text" class="input" max-length="100" name="subject" placeholder="Subject of this contact" name="subject" required />
+                </div>
+                <div class="field">
+                  <textarea class="textarea" name="text" max-length="5000" placeholder="Type your message..." required></textarea>
                 </div>
                 <div class="buttons is-right">
                   <div class="control">
                     <button type="submit" class="button is-primary">Send message</button>
                   </div>
                 </div>
-              </form>
-              <div class="message-text notification is-hidden">                
               </div>
+            </form>
+            <div class="message-text notification is-hidden">                
             </div>
           </div>
           <div class="column">
