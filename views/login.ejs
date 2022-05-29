@@ -1,0 +1,47 @@
+[?- include ('./partials/header') ?]
+[?- include ('./partials/navbar') ?]
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <h1 class="title">
+              Contact <i>us</i>
+            </h1>
+            <p>We are here to build and help build a more free and easy to use inernet. </p>
+            <br>
+            <div class="content">
+              <form class="form box animated scaleInSoft" onsubmit="return sendMessage(this)">
+                <h4>Please fill the form</h4>
+                <p>Please take your time to fill this form. You can also send us an email at overlemonsoft (at) gmail.com.</p>
+                <div class="field">
+                  <input type="text" class="input" max-length="100" name="full_name" placeholder="Your name" required autofocus/>
+                </div>
+                <div class="field">
+                  <input type="email" class="input" max-length="100" name="email" placeholder="Your email" required />
+                </div>
+                <div class="field">
+                  <input type="text" class="input" max-length="100" name="subject" placeholder="Subject of this contact" name="subject" required />
+                </div>
+                <div class="field">
+                  <textarea class="textarea" name="text" max-length="5000" placeholder="Type your message..." required></textarea>
+                </div>
+                <div class="buttons is-right">
+                  <div class="control">
+                    <button type="submit" class="button is-primary">Send message</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="message-text notification is-hidden">                
+            </div>
+          </div>
+          <div class="column">
+            <div class="capture-img animated skewInDesktop" style="background-image: url(/assets/images/flat-captures.jpg)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/contact.js"></script>
+  </section>
+[?- include ('./partials/footer') ?]
