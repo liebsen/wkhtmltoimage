@@ -12,9 +12,6 @@ pre {
   border-radius: 0.25rem;
 }
 
-.navbar-dropdown {
-  border-top: 3px solid #dbdbdb;
-}
 /* tabs */
 
 .tabs {
@@ -42,6 +39,22 @@ pre {
 
 .hero-body {
   flex-grow: 0;
+}
+
+/* navbar */
+
+.navbar-menu {
+  position: relative;
+}
+
+.navbar-dropdown {
+  border-top: 3px solid #dbdbdb;
+}
+
+/* burger */
+
+.navbar-burger span {
+  height: 3px;
 }
 
 .navbar-brand-link svg {
