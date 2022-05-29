@@ -34,3 +34,12 @@ let sendMessage = form => {
   return false
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  var subject = ''
+  if (location.hash) {
+    subject = location.hash.replace('#', '')
+    subject = subject.replace(/\+/g, '%20')
+    subject = decodeURIComponent(subject)
+    document.querySelector('input[name="subject"]').value = subject
+  }
+})
