@@ -70,7 +70,8 @@ app.post('/capture', (req, res) => {
         return connection.query(`INSERT INTO captures SET id = DEFAULT, ${values}, created = NOW(), updated = NOW(), enabled = 1`, function (error, results, fields) {
           if (error) throw error;
           // database ok proceed to generate
-          return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
+          //return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
+          return exec(`xvfb-run --server-args="-screen 0, 1280x1024x24" wkhtmltoimage --use-xserver ${url} ${filepath}`, (err, stdout, stderr) => {
             if (err) {
               console.log(err)
             } else {

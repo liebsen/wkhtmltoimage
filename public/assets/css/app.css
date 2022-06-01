@@ -41,6 +41,13 @@ pre {
   flex-grow: 0;
 }
 
+/* table */
+
+.table {
+  display: block;
+  overflow-x: auto;
+}
+
 /* navbar */
 
 .navbar-menu {
