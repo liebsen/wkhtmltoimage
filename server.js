@@ -152,7 +152,14 @@ app.get('/:view', (req, res) => {
       }      
     })
   } else {
-    res.render(`${__dirname}/views/${req.params.view}.ejs`)
+    var path = `${__dirname}/views/${req.params.view}.ejs`
+    fs.access(path, fs.F_OK, (err) => {
+      if (err) {
+        console.error(err)
+        return res.render(`${__dirname}/views/notfound.ejs`)
+      }
+      return res.render(path)
+    })
   }
 })
 
