@@ -36,8 +36,8 @@
           <div class="column">
             <div class="control capture-container is-loading">
               <a href="[?= data.url ?]" target="_blank">
-                <div class="capture-img animated"></div>
-                <img id="img_loader" class="is-hidden" src="/captures/[?= data.uuid ?].jpg" />
+                <div class="capture-img is-hidden animated"></div>
+                <img id="img_loader" onmouseover="scrollImg(this)" class="is-hidden" src="/captures/[?= data.uuid ?].jpg" />
               </a>
             </div>
           </div>
