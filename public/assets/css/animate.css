@@ -61,8 +61,8 @@
 
 @keyframes skewInSoft {
   0% {
-    transform: scale(0.5) perspective(1040px) rotateY(-200deg) rotateX(2deg) rotate(2deg);
-    opacity: 0.5;
+    transform: scale(0.75) perspective(1040px) rotateY(-200deg) rotateX(2deg) rotate(2deg);
+    opacity: 0.25;
   }
 
   100% {
