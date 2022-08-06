@@ -2,6 +2,10 @@
 function isValidHttpUrl(string) {
   let url;
   
+  if (!string.startsWith('http')) {
+    string = `https://${string}`
+  }
+  
   try {
     url = new URL(string);
   } catch (_) {
