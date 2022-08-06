@@ -5,7 +5,7 @@ function isValidHttpUrl(string) {
   if (!string.startsWith('http')) {
     string = `https://${string}`
   }
-  
+
   try {
     url = new URL(string);
   } catch (_) {
@@ -45,6 +45,9 @@ function capture () {
 }
 
 function capture_loading (data) {
+  if (!data.success) {
+    return alert(`there is a problem with this url: ${data.message}`)
+  }
   const button = document.querySelector('.send-btn')
   var img = document.getElementById('img_loader');
   var capture_url = `/captures/${data.uuid}.jpg`
