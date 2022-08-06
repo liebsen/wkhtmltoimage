@@ -52,7 +52,7 @@ console.log(data)
     document.querySelector('.capture-container').classList.remove('is-loading')
     document.querySelector('.capture-img').classList.remove('skewInDesktop')
 
-    return alert(`there is a problem with this url: ${data.message}`)
+    return alert(`there is a problem with this command: ${data.message.cmd} - code ${data.message.code} killed ${data.message.killed} signal ${data.message.signal}`)
   }
   var img = document.getElementById('img_loader');
   var capture_url = `/captures/${data.uuid}.jpg`
