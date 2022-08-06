@@ -45,10 +45,14 @@ function capture () {
 }
 
 function capture_loading (data) {
+  const button = document.querySelector('.send-btn')
   if (!data.success) {
+    button.classList.remove('is-loading')
+    document.querySelector('.capture-container').classList.remove('is-loading')
+    document.querySelector('.capture-img').classList.remove('skewInDesktop')
+
     return alert(`there is a problem with this url: ${data.message}`)
   }
-  const button = document.querySelector('.send-btn')
   var img = document.getElementById('img_loader');
   var capture_url = `/captures/${data.uuid}.jpg`
   console.log("The image is loading...")
