@@ -46,6 +46,7 @@ function capture () {
 
 function capture_loading (data) {
   const button = document.querySelector('.send-btn')
+console.log(data)
   if (!data.success) {
     button.classList.remove('is-loading')
     document.querySelector('.capture-container').classList.remove('is-loading')

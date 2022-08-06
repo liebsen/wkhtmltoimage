@@ -73,8 +73,6 @@ app.post('/capture', (req, res) => {
           //return exec(`wkhtmltoimage --no-stop-slow-scripts --javascript-delay 3000 ${url} ${filepath}`, (err, stdout, stderr) => {
           return exec(`xvfb-run --server-args="-screen 0, 1024x768x24" wkhtmltoimage --use-xserver ${url} ${filepath}`, (err, stdout, stderr) => {
             if (err) {
-              console.log('-------------error.....................')
-              console.log(err)
               res.json({
                 success: false,
                 message: err
